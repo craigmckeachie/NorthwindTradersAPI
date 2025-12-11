@@ -3,13 +3,16 @@ package com.pluralsight.NorthwindTradersAPI.data;
 
 
 import com.pluralsight.NorthwindTradersAPI.model.Product;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoJdbc {
+@Component
+public class ProductDaoJdbc implements ProductDao {
     private DataSource dataSource;
 
     public ProductDaoJdbc(DataSource dataSource) {
@@ -50,7 +53,7 @@ public class ProductDaoJdbc {
         return products;
     }
 
-    public Product find(int id) {
+    public Product getById(int id) {
         Product product = null;
         String query = "SELECT * FROM products WHERE ProductID = ?";
 
