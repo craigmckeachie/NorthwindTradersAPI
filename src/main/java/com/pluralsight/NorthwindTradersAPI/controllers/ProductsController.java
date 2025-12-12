@@ -29,11 +29,18 @@ public class ProductsController {
     }
 
 
-    @RequestMapping(path = "/products", method = RequestMethod.POST)
+    @RequestMapping(path = "products", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public Product addProduct(@RequestBody Product product) {
         Product newProduct = productDao.insert(product);
         return newProduct;
     }
+
+    @RequestMapping(path = "products/{id}", method = RequestMethod.PUT)
+    public void updateProduct(@PathVariable int id, @RequestBody Product product) {
+        productDao.update(id, product);
+    }
+
+
 
 }
