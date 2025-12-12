@@ -126,7 +126,7 @@ public class ProductDaoJdbc implements ProductDao {
         return product;
     }
 
-    public Product update(Product product) {
+    public void update(int productId, Product product) {
         String query = """
         UPDATE products
         SET ProductName = ?,
@@ -153,15 +153,13 @@ public class ProductDaoJdbc implements ProductDao {
             preparedStatement.setShort(7, product.getUnitsOnOrder());
             preparedStatement.setShort(8, product.getReorderLevel());
             preparedStatement.setBoolean(9, product.getDiscontinued());
-            preparedStatement.setInt(10, product.getProductId()); // WHERE clause
+            preparedStatement.setInt(10, productId); // WHERE clause
 
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return product;
     }
 
     // delete
